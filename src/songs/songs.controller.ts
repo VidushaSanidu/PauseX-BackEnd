@@ -1,14 +1,35 @@
-import { Controller, Get, Post } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  HttpStatus,
+  Param,
+  ParseIntPipe,
+  Post,
+} from '@nestjs/common';
+import { SongsService } from './songs.service';
 
 @Controller('songs')
 export class SongsController {
+  constructor(private songsService: SongsService) {}
+
   @Get()
   getAllSongs(): String {
-    return 'returning all the songs';
+    return this.songsService.getAllSongs();
+  }
+
+  @Get(':id')
+  findOne(
+    @Param(
+      'id',
+      new ParseIntPipe({ errorHttpStatusCode: HttpStatus.NOT_ACCEPTABLE }),
+    )
+    id: number,
+  ) {
+    return 'song';
   }
 
   @Post()
   addSong(): String {
-    return 'song added successfully';
+    return this.songsService.addSong();
   }
 }
