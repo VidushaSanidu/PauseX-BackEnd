@@ -1,4 +1,5 @@
 import {
+  Body,
   Controller,
   Get,
   HttpStatus,
@@ -7,6 +8,7 @@ import {
   Post,
 } from '@nestjs/common';
 import { SongsService } from './songs.service';
+import { AddSongDto } from './dto/addSong.dto';
 
 @Controller('songs')
 export class SongsController {
@@ -29,7 +31,7 @@ export class SongsController {
   }
 
   @Post()
-  addSong(): String {
-    return this.songsService.addSong();
+  addSong(@Body() addSongDto: AddSongDto): Date {
+    return this.songsService.addSong(addSongDto);
   }
 }
