@@ -9,6 +9,7 @@ import {
 } from '@nestjs/common';
 import { SongsService } from './songs.service';
 import { AddSongDto } from './dto/addSong.dto';
+import { Song } from './entity/song.entity';
 
 @Controller('songs')
 export class SongsController {
@@ -31,7 +32,7 @@ export class SongsController {
   }
 
   @Post()
-  addSong(@Body() addSongDto: AddSongDto): Date {
+  async addSong(@Body() addSongDto: AddSongDto): Promise<Song> {
     return this.songsService.addSong(addSongDto);
   }
 }
