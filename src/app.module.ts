@@ -5,6 +5,8 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { DataSource } from 'typeorm';
 import { Song } from './songs/entity/song.entity';
+import { Artist } from './Users/entity/artist.entity';
+import { User } from './Users/entity/user.entity';
 
 @Module({
   imports: [
@@ -17,7 +19,7 @@ import { Song } from './songs/entity/song.entity';
       username: 'postgres',
       password: process.env.DB_PASSWORD,
       database: 'pauseXDB',
-      entities: [Song],
+      entities: [Song, Artist, User],
       synchronize: true,
     }),
   ],
