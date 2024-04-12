@@ -7,6 +7,8 @@ import { DataSource } from 'typeorm';
 import { Song } from './songs/entity/song.entity';
 import { Artist } from './Users/entity/artist.entity';
 import { User } from './Users/entity/user.entity';
+import { Playlist } from './playlists/playlist.entity';
+import { PlaylistModule } from './playlists/playlist.module';
 
 @Module({
   imports: [
@@ -19,9 +21,10 @@ import { User } from './Users/entity/user.entity';
       username: 'postgres',
       password: process.env.DB_PASSWORD,
       database: 'pauseXDB',
-      entities: [Song, Artist, User],
+      entities: [Song, Artist, User, Playlist],
       synchronize: true,
     }),
+    PlaylistModule,
   ],
   controllers: [],
   providers: [],
