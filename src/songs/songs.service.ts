@@ -19,6 +19,7 @@ export class SongsService {
     song.title = addSongDto.title;
     song.artists = addSongDto.artists;
     song.duration = addSongDto.duration;
+    song.lyrics = addSongDto.lyrics;
     song.releasedDate = addSongDto.releasedDate;
 
     return await this.songRepository.save(song);
