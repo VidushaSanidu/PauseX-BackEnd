@@ -9,6 +9,8 @@ import { Artist } from './Users/entity/artist.entity';
 import { User } from './Users/entity/user.entity';
 import { Playlist } from './playlists/playlist.entity';
 import { PlaylistModule } from './playlists/playlist.module';
+import { AuthModule } from './auth/auth.module';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
@@ -21,16 +23,18 @@ import { PlaylistModule } from './playlists/playlist.module';
       username: 'postgres',
       password: process.env.DB_PASSWORD,
       database: 'pauseXDB',
-      entities: [Song, Artist, User, Playlist],
+      entities: [Song, Artist, Playlist, User],
       synchronize: true,
     }),
     PlaylistModule,
+    AuthModule,
+    UsersModule,
   ],
   controllers: [],
   providers: [],
 })
 export class AppModule implements NestModule {
-  // test database
+  // test databas
   // constructor(private dataSource: DataSource) {
   //   console.log(dataSource.driver.database);
   // }
