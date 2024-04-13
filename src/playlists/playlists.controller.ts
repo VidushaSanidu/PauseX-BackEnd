@@ -1,4 +1,16 @@
-import { Controller } from '@nestjs/common';
+import { Body, Controller, Post } from '@nestjs/common';
+import { PlaylistsService } from './playlists.service';
+import { CreatePlayListDto } from './dto/createPlayListDto';
+import { Playlist } from './playlist.entity';
 
 @Controller('playlists')
-export class PlaylistsController {}
+export class PlaylistsController {
+  constructor(private playListService: PlaylistsService) {}
+  @Post()
+  create(
+    @Body()
+    playlistDTO: CreatePlayListDto,
+  ): Promise<Playlist> {
+    return this.playListService.create(playlistDTO);
+  }
+}
