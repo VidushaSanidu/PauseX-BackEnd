@@ -3,19 +3,17 @@ import { SongsModule } from './songs/songs.module';
 import { LoggerMiddleware } from './common/middleware/logger/logger.middleware';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { DataSource } from 'typeorm';
-import { Song } from './songs/entity/song.entity';
-import { Artist } from './Users/entity/artist.entity';
-import { User } from './Users/entity/user.entity';
-import { Playlist } from './playlists/playlist.entity';
 import { PlaylistModule } from './playlists/playlist.module';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
+import { authConfig } from './common/configure/auth.config';
 
 @Module({
   imports: [
     SongsModule,
-    ConfigModule.forRoot(),
+    ConfigModule.forRoot({
+      load: [authConfig],
+    }),
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: 'localhost',

@@ -9,23 +9,10 @@ import { JwtService } from '@nestjs/jwt';
 export class AuthService {
   constructor(
     private userService: UsersService,
-    private jwtSerivce: JwtService,
+    private jwtService: JwtService,
   ) {}
-  // async login(loginDTO: LoginDTO): Promise<User> {
-  //   const user = await this.userService.findOne(loginDTO); // 1.
-  //   const passwordMatched = await bcrypt.compare(
-  //     loginDTO.password,
-  //     user.password,
-  //   ); // 2.
-  //   if (passwordMatched) {
-  //     // 3.
-  //     delete user.password; // 4.
-  //     return user;
-  //   } else {
-  //     throw new UnauthorizedException('Password does not match'); // 5.
-  //   }
-  // }
-  async login(loginDTO: LoginDTO): Promise<{ accessToken: String }> {
+
+  async login(loginDTO: LoginDTO): Promise<{ accessToken: string }> {
     const user = await this.userService.findOne(loginDTO); // 1.
     const passwordMatched = await bcrypt.compare(
       loginDTO.password,
@@ -33,7 +20,8 @@ export class AuthService {
     ); // 2.
     if (passwordMatched) {
       const payload = { email: user.email, sub: user.id };
-      return { accessToken: this.jwtSerivce.sign(payload) };
+      console.log(payload);
+      return { accessToken: await this.jwtService.signAsync(payload) };
     } else {
       throw new UnauthorizedException('Password does not match'); // 5.
     }
