@@ -13,7 +13,12 @@ export class JWTStrategy extends PassportStrategy(Strategy) {
       secretOrKey: authConfig().secret,
     });
   }
-  async validate(payload: any) {
-    return { userId: payload.sub, email: payload.email };
+  async validate(payload: PayloadType) {
+    //1.
+    return {
+      userId: payload.userId,
+      email: payload.email,
+      artistId: payload.artistId, // 2 };
+    };
   }
 }
